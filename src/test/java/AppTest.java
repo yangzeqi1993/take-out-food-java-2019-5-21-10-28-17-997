@@ -16,15 +16,15 @@ public class AppTest {
         App app = new App(new ItemRepositoryTestImpl(), new SalesPromotionRepositoryTestImpl());
         String receiptString = app.bestCharge(inputs);
 
-        assertThat(receiptString, is("============= è®¢é¤æ˜ç»† =============\n" +
-                "é»„ç„–é¸¡ x 1 = 18å…ƒ\n" +
-                "è‚‰å¤¹é¦ x 2 = 12å…ƒ\n" +
-                "å‡‰çš® x 1 = 8å…ƒ\n" +
+        assertThat(receiptString, is("============= ¶©²ÍÃ÷Ï¸ =============\n" +
+                "»ÆìË¼¦ x 1 = 18Ôª\n" +
+                "Èâ¼ĞâÉ x 2 = 12Ôª\n" +
+                "Á¹Æ¤ x 1 = 8Ôª\n" +
                 "-----------------------------------\n" +
-                "ä½¿ç”¨ä¼˜æƒ :\n" +
-                "æŒ‡å®šèœå“åŠä»·(é»„ç„–é¸¡ï¼Œå‡‰çš®)ï¼Œçœ13å…ƒ\n" +
+                "Ê¹ÓÃÓÅ»İ:\n" +
+                "Ö¸¶¨²ËÆ·°ë¼Û(»ÆìË¼¦£¬Á¹Æ¤)£¬Ê¡13Ôª\n" +
                 "-----------------------------------\n" +
-                "æ€»è®¡ï¼š25å…ƒ\n" +
+                "×Ü¼Æ£º25Ôª\n" +
                 "==================================="));
 
     }
@@ -36,14 +36,14 @@ public class AppTest {
         App app = new App(new ItemRepositoryTestImpl(), new SalesPromotionRepositoryTestImpl());
         String receiptString = app.bestCharge(inputs);
 
-        assertThat(receiptString, is("============= è®¢é¤æ˜ç»† =============\n" +
-                "è‚‰å¤¹é¦ x 4 = 24å…ƒ\n" +
-                "å‡‰çš® x 1 = 8å…ƒ\n" +
+        assertThat(receiptString, is("============= ¶©²ÍÃ÷Ï¸ =============\n" +
+                "Èâ¼ĞâÉ x 4 = 24Ôª\n" +
+                "Á¹Æ¤ x 1 = 8Ôª\n" +
                 "-----------------------------------\n" +
-                "ä½¿ç”¨ä¼˜æƒ :\n" +
-                "æ»¡30å‡6å…ƒï¼Œçœ6å…ƒ\n" +
+                "Ê¹ÓÃÓÅ»İ:\n" +
+                "Âú30¼õ6Ôª£¬Ê¡6Ôª\n" +
                 "-----------------------------------\n" +
-                "æ€»è®¡ï¼š26å…ƒ\n" +
+                "×Ü¼Æ£º26Ôª\n" +
                 "==================================="));
 
     }
@@ -56,10 +56,10 @@ public class AppTest {
         App app = new App(new ItemRepositoryTestImpl(), new SalesPromotionRepositoryTestImpl());
         String receiptString = app.bestCharge(inputs);
 
-        assertThat(receiptString, is("============= è®¢é¤æ˜ç»† =============\n" +
-                "è‚‰å¤¹é¦ x 4 = 24å…ƒ\n" +
+        assertThat(receiptString, is("============= ¶©²ÍÃ÷Ï¸ =============\n" +
+                "Èâ¼ĞâÉ x 4 = 24Ôª\n" +
                 "-----------------------------------\n" +
-                "æ€»è®¡ï¼š24å…ƒ\n" +
+                "×Ü¼Æ£º24Ôª\n" +
                 "==================================="));
 
     }

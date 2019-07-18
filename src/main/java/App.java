@@ -65,7 +65,7 @@ public class App {
         for(SalesPromotion salespromotion : sales_total){
             String relateditems = String.join(",", salespromotion.getRelatedItems());
             promotioninput[method_kind++] = new PromotionInput(salespromotion.getType(), salespromotion.getDisplayName(), relateditems);
-            System.out.println(promotioninput[method_kind-1].relatedItems);
+          //  System.out.println(promotioninput[method_kind-1].relatedItems);
         }
 
         //计算优惠后的金额
@@ -77,7 +77,7 @@ public class App {
         if (total_money >= Integer.parseInt(promotion_price[1])) {
             promotion_money1 -= Integer.parseInt(promotion_price[3]);
             method_final = 1;
-            System.out.println("优惠一减后的金额：" + promotion_money1);
+           // System.out.println("优惠一减后的金额：" + promotion_money1);
         }
 
           //采用部分菜品半价优惠
@@ -95,7 +95,7 @@ public class App {
         }
         if(method_final==2) {
             promotion_money2 -= reduced_money;
-            System.out.println("优惠二减后的金额：" + promotion_money2);
+           // System.out.println("优惠二减后的金额：" + promotion_money2);
         }
 
 
@@ -105,7 +105,7 @@ public class App {
             method_final = 1;
         } else {
             total_money = promotion_money2;
-            // method_final = 2;
+            // method_final = 2;        //此时method_final为2或0
         }
 
 
@@ -135,6 +135,7 @@ public class App {
             buf.append("总计：" + Math.round(total_money) + "元\n" +
                     "===================================");
             menu_output = buf.toString();
+
         } else {
             StringBuffer buf = new StringBuffer();
             buf.append("============= 订餐明细 =============\n");
@@ -146,7 +147,7 @@ public class App {
                     "===================================");
             menu_output = buf.toString();
         }
-
+        System.out.println(menu_output);
        return menu_output;
 
     }

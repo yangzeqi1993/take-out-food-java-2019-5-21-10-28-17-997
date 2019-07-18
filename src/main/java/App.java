@@ -28,7 +28,7 @@ public class App {
         List<Item> menu_total = this.itemRepository.findAll();
         List<SalesPromotion> sales_total = this.salesPromotionRepository.findAll();
 
-        //Item æ•°æ®å­—å…¸
+        //Item Êı¾İ×Öµä
         Map<String, String> id_name = new HashMap<>();
         for(Item item : menu_total){
             id_name.put(item.getId(), item.getName());
@@ -40,9 +40,9 @@ public class App {
         }
 
 
-        double total_money = 0;     //  æœªæ‰“æŠ˜æ€»è´¹ç”¨
+        double total_money = 0;     //  Î´´òÕÛ×Ü·ÑÓÃ
 
-        //åˆ›å»ºèœå“çš„å¯¹è±¡
+        //´´½¨²ËÆ·µÄ¶ÔÏó
         int len = menu.length;
         ItemInput iteminput[]  = new ItemInput[len];
 
@@ -57,7 +57,7 @@ public class App {
         }
 
 
-        //åˆ›å»ºä¼˜æƒ æ–¹å¼çš„å¯¹è±¡
+        //´´½¨ÓÅ»İ·½Ê½µÄ¶ÔÏó
         int method_num = sales_total.size();
         PromotionInput promotioninput[]  = new PromotionInput[method_num];
 
@@ -68,21 +68,21 @@ public class App {
           //  System.out.println(promotioninput[method_kind-1].relatedItems);
         }
 
-        //è®¡ç®—ä¼˜æƒ åçš„é‡‘é¢
-        int method_final = 0;                       // å®šä¹‰æœ€ç»ˆæ‰€é‡‡ç”¨çš„æ–¹æ³•
+        //¼ÆËãÓÅ»İºóµÄ½ğ¶î
+        int method_final = 0;                       // ¶¨Òå×îÖÕËù²ÉÓÃµÄ·½·¨
 
-        //é‡‡ç”¨æ»¡30å‡6æ–¹æ³•ä¼˜æƒ 
-        double  promotion_money1 = total_money;      //ä¼˜æƒ ä¸€æ‰“æŠ˜åçš„ä»·æ ¼
+        //²ÉÓÃÂú30¼õ6·½·¨ÓÅ»İ
+        double  promotion_money1 = total_money;      //ÓÅ»İÒ»´òÕÛºóµÄ¼Û¸ñ
         String[] promotion_price = promotioninput[0].type.split("_");
         if (total_money >= Integer.parseInt(promotion_price[1])) {
             promotion_money1 -= Integer.parseInt(promotion_price[3]);
             method_final = 1;
-           // System.out.println("ä¼˜æƒ ä¸€å‡åçš„é‡‘é¢ï¼š" + promotion_money1);
+           // System.out.println("ÓÅ»İÒ»¼õºóµÄ½ğ¶î£º" + promotion_money1);
         }
 
-          //é‡‡ç”¨éƒ¨åˆ†èœå“åŠä»·ä¼˜æƒ 
-        double  promotion_money2 = total_money;      //ä¼˜æƒ äºŒæ‰“æŠ˜åçš„ä»·æ ¼
-        double reduced_money = 0;                //å®šä¹‰ä¼˜æƒ çš„é‡‘é¢
+          //²ÉÓÃ²¿·Ö²ËÆ·°ë¼ÛÓÅ»İ
+        double  promotion_money2 = total_money;      //ÓÅ»İ¶ş´òÕÛºóµÄ¼Û¸ñ
+        double reduced_money = 0;                //¶¨ÒåÓÅ»İµÄ½ğ¶î
         String discount_str = promotioninput[1].type.substring(0,2);
         double discount = Double.parseDouble(discount_str)/100;
         String[] promotionid = promotioninput[1].relatedItems.split(",");
@@ -95,60 +95,61 @@ public class App {
         }
         if(method_final==2) {
             promotion_money2 -= reduced_money;
-           // System.out.println("ä¼˜æƒ äºŒå‡åçš„é‡‘é¢ï¼š" + promotion_money2);
+           // System.out.println("ÓÅ»İ¶ş¼õºóµÄ½ğ¶î£º" + promotion_money2);
         }
 
 
-        //åˆ¤æ–­é‚£ç§æ–¹æ³•ä»·æ ¼ä½
+        //ÅĞ¶ÏÄÇÖÖ·½·¨¼Û¸ñµÍ
         if (promotion_money1 < promotion_money2) {
             total_money = promotion_money1;
             method_final = 1;
         } else {
             total_money = promotion_money2;
-            // method_final = 2;        //æ­¤æ—¶method_finalä¸º2æˆ–0
+            // method_final = 2;        //´ËÊ±method_finalÎª2»ò0
         }
 
 
-        //è¾“å‡ºèœå•
+        //Êä³ö²Ëµ¥
         String menu_output;
         if (method_final == 1) {
             StringBuffer buf = new StringBuffer();
-            buf.append("============= è®¢é¤æ˜ç»† =============\n");
+            buf.append("============= ¶©²ÍÃ÷Ï¸ =============\n");
             for(int i=0; i<len; i++){
-                buf.append(iteminput[i].name +" x " +iteminput[i].num +" = " + Math.round(iteminput[i].total_price) + "å…ƒ\n");
+                buf.append(iteminput[i].name +" x " +iteminput[i].num +" = " + Math.round(iteminput[i].total_price) + "Ôª\n");
             }
-            buf.append("-----------------------------------\n" + "ä½¿ç”¨ä¼˜æƒ :\n");
-            buf.append(promotioninput[method_final-1].displayName + "ï¼Œçœ" + promotion_price[3] + "å…ƒ\n" +
+            buf.append("-----------------------------------\n" + "Ê¹ÓÃÓÅ»İ:\n");
+            buf.append(promotioninput[method_final-1].displayName + "£¬Ê¡" + promotion_price[3] + "Ôª\n" +
                     "-----------------------------------\n");
-            buf.append("æ€»è®¡ï¼š" + Math.round(total_money) + "å…ƒ\n" +
+            buf.append("×Ü¼Æ£º" + Math.round(total_money) + "Ôª\n" +
                     "===================================");
             menu_output = buf.toString();
         } else if (method_final==2) {
             StringBuffer buf = new StringBuffer();
-            buf.append("============= è®¢é¤æ˜ç»† =============\n");
+            buf.append("============= ¶©²ÍÃ÷Ï¸ =============\n");
             for(int i=0; i<len; i++){
-                buf.append(iteminput[i].name +" x " +iteminput[i].num +" = " + Math.round(iteminput[i].total_price) + "å…ƒ\n");
+                buf.append(iteminput[i].name +" x " +iteminput[i].num +" = " + Math.round(iteminput[i].total_price) + "Ôª\n");
             }
-            buf.append("-----------------------------------\n" + "ä½¿ç”¨ä¼˜æƒ :\n");
-            buf.append(promotioninput[method_final-1].displayName + "(é»„ç„–é¸¡ï¼Œå‡‰çš®)ï¼Œçœ" + Math.round(reduced_money) + "å…ƒ\n" +
+            buf.append("-----------------------------------\n" + "Ê¹ÓÃÓÅ»İ:\n");
+            buf.append(promotioninput[method_final-1].displayName + "(»ÆìË¼¦£¬Á¹Æ¤)£¬Ê¡" + Math.round(reduced_money) + "Ôª\n" +
                     "-----------------------------------\n");
-            buf.append("æ€»è®¡ï¼š" + Math.round(total_money) + "å…ƒ\n" +
+            buf.append("×Ü¼Æ£º" + Math.round(total_money) + "Ôª\n" +
                     "===================================");
             menu_output = buf.toString();
 
         } else {
             StringBuffer buf = new StringBuffer();
-            buf.append("============= è®¢é¤æ˜ç»† =============\n");
+            buf.append("============= ¶©²ÍÃ÷Ï¸ =============\n");
             for(int i=0; i<len; i++){
-                buf.append(iteminput[i].name +" x " +iteminput[i].num +" = " + Math.round(iteminput[i].total_price) + "å…ƒ\n");
+                buf.append(iteminput[i].name +" x " +iteminput[i].num +" = " + Math.round(iteminput[i].total_price) + "Ôª\n");
             }
             buf.append("-----------------------------------\n");
-            buf.append("æ€»è®¡ï¼š" + Math.round(total_money) + "å…ƒ\n" +
+            buf.append("×Ü¼Æ£º" + Math.round(total_money) + "Ôª\n" +
                     "===================================");
             menu_output = buf.toString();
         }
-//        System.out.println(menu_output);
-       return menu_output;
+
+        System.out.println(menu_output);
+        return menu_output;
 
     }
 }

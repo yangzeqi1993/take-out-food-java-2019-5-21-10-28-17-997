@@ -21,7 +21,7 @@ public class App {
 
         String menu_input = String.join(",", inputs);
 
-        System.out.println(menu_input);
+        // System.out.println(menu_input);
 
         String[] menu = menu_input.split(",");
 
